@@ -5,9 +5,9 @@
 #define _b(bit)                         (1 << (bit))
 
 // use the following variable naming convention for these macros
-//volatile uint8_t *FOO = &DDRB;
-//volatile uint8_t *FOO = &PORTB;
-//volatile uint8_t *FOO = &PINB;
+//volatile uint8_t *FOO_DDR = &DDRB;
+//volatile uint8_t *FOO_PIN = &PINB;
+//volatile uint8_t *FOO_PORT = &PORTB;
 //uint8_t FOO = PB7;
 #define setOutput(bit)                  {*bit ## _DDR |= _b(bit);}
 #define setInput(bit)                   {*bit ## _DDR &= ~_b(bit);}
@@ -20,9 +20,9 @@
 #define isLow(bit)                      (!(*bit ## _PIN & _b(bit)))
 
 // use the following variable naming convention for these macros
-//volatile uint8_t *FOO[BAR] = {&DDRC, &DDRC};
-//volatile uint8_t *FOO[BAR] = {&PINC, &PINC};
-//volatile uint8_t *FOO[BAR] = {&PORTC, &PORTC};
+//volatile uint8_t *FOO_DDR[BAR] = {&DDRC, &DDRC};
+//volatile uint8_t *FOO_PIN[BAR] = {&PINC, &PINC};
+//volatile uint8_t *FOO_PORT[BAR] = {&PORTC, &PORTC};
 //uint8_t FOO[BAR] = {PC1, PC2};
 #define arrSetOutput(bitArr, i)         {*bitArr ## _DDR[i] |= _b(bitArr[i]);}
 #define arrSetInput(bitArr, i)          {*bitArr ## _DDR[i] &= ~_b(bitArr[i]);}
