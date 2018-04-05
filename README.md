@@ -7,8 +7,8 @@
     
     void setup() {
         volatile uint8_t *LED_DDR = &DDRB;
-        volatile uint8_t *LED_PORT = &PORTB;
         volatile uint8_t *LED_PIN = &PINB;
+        volatile uint8_t *LED_PORT = &PORTB;
         uint8_t LED = PB7;
         
         setOutput(LED);        
