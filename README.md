@@ -37,9 +37,9 @@ Pin variables must conform to a naming convention in order for the macro functio
 
 **Blink array**
 
-    #include "avr_bit_funcs.h"
     #include "Arduino.h"
-    
+    #include "avr_bit_funcs.h"
+        
     #define NUM_OUTPUTS 2
     
     volatile uint8_t *OUTPUTS_DDR[NUM_OUTPUTS] = {&DDRB, &DDRB};
