@@ -1,1 +1,2 @@
-# AVR bit funcs - bit manipulation functions
+# AVR bit funcs
+## Bit manipulation functions
