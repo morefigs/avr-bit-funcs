@@ -2,7 +2,7 @@
 #define AVR_BIT_FUNCS
 
 // get byte value
-#define _b(bit)                                     (1 << (bit))
+#define _b(bit)                         (1 << (bit))
 
 // use the following variable naming convention for these macros
 //volatile uint8_t *FOO = &DDRB;
