@@ -1,37 +1,51 @@
 #ifndef AVR_BIT_FUNCS
 #define AVR_BIT_FUNCS
 
-// get byte value
-#define _b(bit)                         (1 << (bit))
+// not needed if already importing Arduino.h
+#ifndef _AVR_SFR_DEFS_H_
+#include <inttypes.h>
+#define _BV(bit) (1UL << (bit))
+#define _MMIO_BYTE(addr) (*(volatile uint8_t *)(addr))
+#  if __AVR_ARCH__ >= 100
+#    define __SFR_OFFSET 0x00
+#  else
+#    define __SFR_OFFSET 0x20
+#  endif
+#endif
 
-// use the following variable naming convention for these macros
-//volatile uint8_t *FOO_DDR = &DDRB;
-//volatile uint8_t *FOO_PIN = &PINB;
-//volatile uint8_t *FOO_PORT = &PORTB;
-//uint8_t FOO = PB7;
-#define setOutput(bit)                  {*bit ## _DDR |= _b(bit);}
-#define setInput(bit)                   {*bit ## _DDR &= ~_b(bit);}
-#define enablePullup(bit)               {*bit ## _PORT |= _b(bit);}
-#define disablePullup(bit)              {*bit ## _PORT &= ~_b(bit);}
-#define setHigh(bit)                    {*bit ## _PORT |= _b(bit);}
-#define setLow(bit)                     {*bit ## _PORT &= ~_b(bit);}
-#define toggle(bit)                     {*bit ## _PIN |= _b(bit);}
-#define isHigh(bit)                     (*bit ## _PIN & _b(bit))
-#define isLow(bit)                      (!(*bit ## _PIN & _b(bit)))
+// register offsets
+#define PA 0x00
+#define PB 0x03
+#define PC 0x06
+#define PD 0x09
+#define PE 0x0C
+#define PF 0x0F
+#define PG 0x12
+// these ports are slower to manipulate due to having 16-bit addresses
+#define PH 0x100
+#define PJ 0x103
+#define PK 0x106
+#define PL 0x109
 
-// use the following variable naming convention for these macros
-//volatile uint8_t *FOO_DDR[BAR] = {&DDRC, &DDRC};
-//volatile uint8_t *FOO_PIN[BAR] = {&PINC, &PINC};
-//volatile uint8_t *FOO_PORT[BAR] = {&PORTC, &PORTC};
-//uint8_t FOO[BAR] = {PC1, PC2};
-#define arrSetOutput(bitArr, i)         {*bitArr ## _DDR[i] |= _b(bitArr[i]);}
-#define arrSetInput(bitArr, i)          {*bitArr ## _DDR[i] &= ~_b(bitArr[i]);}
-#define arrEnablePullup(bitArr, i)      {*bitArr ## _PORT[i] |= _b(bitArr[i]);}
-#define arrDisablePullup(bitArr, i)     {*bitArr ## _PORT[i] &= ~_b(bitArr[i]);}
-#define arrSetHigh(bitArr, i)           {*bitArr ## _PORT[i] |= _b(bitArr[i]);}
-#define arrSetLow(bitArr, i)            {*bitArr ## _PORT[i] &= ~_b(bitArr[i]);}
-#define arrToggle(bitArr, i)            {*bitArr ## _PIN[i] |= _b(bitArr[i]);}
-#define arrIsHigh(bitArr, i)            (*bitArr ## _PIN[i] & _b(bitArr[i]))
-#define arrIsLow(bitArr, i)             (!(*bitArr ## _PIN[i] & _b(bitArr[i])))
+#define OFFSET_ADDR(addr)   ((addr) < 0x80 ? (addr) + __SFR_OFFSET : (addr))
+#define SET_OUTPUT(pin)     (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x1)) |=  _BV((pin)[1]))
+#define SET_INPUT(pin)      (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x1)) &= ~_BV((pin)[1]))
+#define ENABLE_PULLUP(pin)  (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |=  _BV((pin)[1]))
+#define DISABLE_PULLUP(pin) (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) &= ~_BV((pin)[1]))
+#define SET_HIGH(pin)       (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |=  _BV((pin)[1]))
+#define SET_LOW(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) &= ~_BV((pin)[1]))
+#define TOGGLE(pin)         (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) |= _BV((pin)[1]))
+#define IS_HIGH(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) & _BV((pin)[1])))
+#define IS_LOW(pin)         (!IS_HIGH(pin))
 
-#endif //AVR_BIT_FUNCS
+#endif // AVR_BIT_FUNCS
+
+
+
+
+//const uint16_t TRIG[2] = {PH, 4};
+//const uint16_t PINS[][2] = {
+//        {PA, 1},    // 4
+//        {PB, 2},    // 16
+//};
+//
