@@ -2,6 +2,8 @@
 ## Bit manipulation functions
 Fast bit manipulation macro functions for controlling Arduino or AVR microcontroller pins.
 
+Only tested on ATmega2560.
+
 ## Examples
 **Blink**
     
