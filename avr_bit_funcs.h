@@ -1,7 +1,6 @@
 #ifndef AVR_BIT_FUNCS
 #define AVR_BIT_FUNCS
 
-// not needed if already importing Arduino.h
 #ifndef _AVR_SFR_DEFS_H_
 #include <inttypes.h>
 #define _BV(bit) (1UL << (bit))
