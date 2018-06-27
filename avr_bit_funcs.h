@@ -38,13 +38,3 @@
 #define IS_LOW(pin)         (!IS_HIGH(pin))
 
 #endif // AVR_BIT_FUNCS
-
-
-
-
-//const uint16_t TRIG[2] = {PH, 4};
-//const uint16_t PINS[][2] = {
-//        {PA, 1},    // 4
-//        {PB, 2},    // 16
-//};
-//
