@@ -34,7 +34,7 @@
 #define SET_HIGH(pin)       (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |=  _BV((pin)[1]))
 #define SET_LOW(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) &= ~_BV((pin)[1]))
 #define TOGGLE(pin)         (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) |= _BV((pin)[1]))
-#define IS_HIGH(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) & _BV((pin)[1])))
+#define IS_HIGH(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) & _BV((pin)[1]))
 #define IS_LOW(pin)         (!IS_HIGH(pin))
 
 #endif // AVR_BIT_FUNCS
