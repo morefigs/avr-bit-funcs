@@ -28,11 +28,12 @@ Only tested on ATmega2560.
     #include "Arduino.h"
     #include "avr_bit_funcs.h"
 
-    #define NUM_LEDS
+    #define NUM_LEDS 3
 
     const uint16_t LEDS[NUM_LEDS][2] = {
         {PB, 4},
-        {PB, 5}
+        {PB, 5},
+        {PB, 6}
     };
     
     void setup() {
