@@ -27,11 +27,11 @@
 #define PL 0x109
 
 #define OFFSET_ADDR(addr)   ((addr) < 0x80 ? (addr) + __SFR_OFFSET : (addr))
-#define SET_OUTPUT(pin)     (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x1)) |=  _BV((pin)[1]))
+#define SET_OUTPUT(pin)     (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x1)) |= _BV((pin)[1]))
 #define SET_INPUT(pin)      (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x1)) &= ~_BV((pin)[1]))
-#define ENABLE_PULLUP(pin)  (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |=  _BV((pin)[1]))
+#define ENABLE_PULLUP(pin)  (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |= _BV((pin)[1]))
 #define DISABLE_PULLUP(pin) (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) &= ~_BV((pin)[1]))
-#define SET_HIGH(pin)       (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |=  _BV((pin)[1]))
+#define SET_HIGH(pin)       (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) |= _BV((pin)[1]))
 #define SET_LOW(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0] + 0x2)) &= ~_BV((pin)[1]))
 #define TOGGLE(pin)         (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) |= _BV((pin)[1]))
 #define IS_HIGH(pin)        (_MMIO_BYTE(OFFSET_ADDR((pin)[0])) & _BV((pin)[1]))
